@@ -15,9 +15,9 @@ namespace P2FixAnAppDotNetCode.Tests
         [Fact]
         public void AddItemInCart()
         {
-            Cart cart = new Cart();
-            Product product1 = new Product(1, 0, 20, "name", "description");
-            Product product2 = new Product(1, 0, 20, "name", "description");
+            var cart = new Cart();
+            var product1 = new Product(1, 0, 20, "name", "description");
+            var product2 = new Product(1, 0, 20, "name", "description");
 
             cart.AddItem(product1, 1);
             cart.AddItem(product2, 1);
@@ -38,8 +38,8 @@ namespace P2FixAnAppDotNetCode.Tests
             IEnumerable<Product> products = productService.GetAllProducts();
             cart.AddItem(products.First(p => p.Id == 2), 2);
             cart.AddItem(products.First(p => p.Id == 5), 1);
-            double averageValue = cart.GetAverageValue();
-            double expectedValue = (9.99 * 2 + 895.00) / 3;
+            var averageValue = cart.GetAverageValue();
+            var expectedValue = (9.99 * 2 + 895.00) / 3;
 
             Assert.Equal(expectedValue, averageValue);
         }
@@ -56,8 +56,8 @@ namespace P2FixAnAppDotNetCode.Tests
             cart.AddItem(products.First(p => p.Id == 1), 1);
             cart.AddItem(products.First(p => p.Id == 4), 3);
             cart.AddItem(products.First(p => p.Id == 5), 1);
-            double totalValue = cart.GetTotalValue();
-            double expectedValue = 92.50 + 32.50 * 3 + 895.00;
+            var totalValue = cart.GetTotalValue();
+            const double expectedValue = 92.50 + 32.50 * 3 + 895.00;
 
             Assert.Equal(expectedValue, totalValue);
         }
@@ -65,11 +65,11 @@ namespace P2FixAnAppDotNetCode.Tests
         [Fact]
         public void FindProductInCartLines()
         {
-            Cart cart = new Cart();
-            Product product = new Product(999, 0, 20, "name", "description");
+            var cart = new Cart();
+            var product = new Product(999, 0, 20, "name", "description");
 
             cart.AddItem(product, 1);
-            Product result = cart.FindProductInCartLines(999);
+            var result = cart.FindProductInCartLines(999);
 
             Assert.NotNull(result);
         }
