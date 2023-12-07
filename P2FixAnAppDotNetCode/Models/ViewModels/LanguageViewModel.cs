@@ -1,4 +1,6 @@
-﻿namespace P2FixAnAppDotNetCode.Models.ViewModels
+﻿using System.Collections.Generic;
+
+namespace P2FixAnAppDotNetCode.Models.ViewModels
 {
     public class LanguageViewModel
     {

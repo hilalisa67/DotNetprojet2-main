@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 
 namespace P2FixAnAppDotNetCode.Models.Services
@@ -37,6 +38,11 @@ namespace P2FixAnAppDotNetCode.Models.Services
             context.Response.Cookies.Append(
                 CookieRequestCultureProvider.DefaultCookieName,
                 CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)));
+        }
+
+        public IEnumerable<string> GetLanguages()
+        {
+            return new List<string> {"en", "fr", "es"};
         }
     }
 }
