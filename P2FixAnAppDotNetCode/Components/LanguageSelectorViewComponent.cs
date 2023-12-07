@@ -1,13 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using P2FixAnAppDotNetCode.Models.Services;
+using P2FixAnAppDotNetCode.Models.ViewModels;
 
 namespace P2FixAnAppDotNetCode.Components
 {
     public class LanguageSelectorViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke(ILanguageService languageService)
+        private readonly ILanguageService _languageService;
+
+        public LanguageSelectorViewComponent(ILanguageService languageService)
         {
-            return View(languageService);
+            _languageService = languageService;
+        }
+
+        public IViewComponentResult Invoke()
+        {
+            var model = new LanguageViewModel
+            {
+                Language = _languageService.SetCulture(HttpContext.Request.Query["language"])
+            };
+
+            return View(model);
         }
     }
 }
