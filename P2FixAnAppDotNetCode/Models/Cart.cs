@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace P2FixAnAppDotNetCode.Models
@@ -8,6 +9,9 @@ namespace P2FixAnAppDotNetCode.Models
     /// </summary>
     public class Cart : ICart
     {
+        
+        private List<CartLine> _cartLines = new List<CartLine>();
+        
         /// <summary>
         /// Read-only property for dispaly only
         /// </summary>
@@ -19,7 +23,7 @@ namespace P2FixAnAppDotNetCode.Models
         /// <returns></returns>
         private List<CartLine> GetCartLineList()
         {
-            return new List<CartLine>();
+            return _cartLines;
         }
 
         /// <summary>
@@ -27,7 +31,24 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>//
         public void AddItem(Product product, int quantity)
         {
-            // TODO implement the method
+            // Get the current cart lines
+            var cartLines = GetCartLineList();
+
+            // Check if the product already exists in the cart
+            var cartLine = cartLines.FirstOrDefault(p => p.Product.Id == product.Id);
+
+            Console.WriteLine(cartLine);
+            if (cartLine != null)
+            {
+                // If the product exists, increment the quantity
+                cartLine.Quantity += quantity;
+            }
+            else
+            {
+                // If the product does not exist, add a new CartLine
+                cartLines.Add(new CartLine { Product = product, Quantity = quantity });
+            }
+            
         }
 
         /// <summary>
