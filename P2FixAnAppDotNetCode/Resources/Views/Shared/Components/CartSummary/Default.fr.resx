@@ -120,4 +120,7 @@
   <data name="YourCart" xml:space="preserve">
     <value>Votre panier</value>
   </data>
+  <data name="Item" xml:space="preserve">
+    <value>article</value>
+  </data>
 </root>

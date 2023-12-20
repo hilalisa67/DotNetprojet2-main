@@ -14,7 +14,7 @@ namespace P2FixAnAppDotNetCode.Models.Services
         /// </summary>
         public void ChangeUiLanguage(HttpContext context, string language)
         {
-            string culture = SetCulture(language);
+            var culture = SetCulture(language);
             UpdateCultureCookie(context, culture);
         }
 
@@ -23,10 +23,14 @@ namespace P2FixAnAppDotNetCode.Models.Services
         /// </summary>
         public string SetCulture(string language)
         {
-            string culture = "";
-            // TODO complete the code 
-            // Default language is "en", french is "fr" and spanish is "es".
-            
+            var culture = language switch
+            {
+                "English" => "en",
+                "French" => "fr",
+                "Spanish" => "es",
+                _ => ""
+            };
+
             return culture;
         }
 
@@ -37,12 +41,9 @@ namespace P2FixAnAppDotNetCode.Models.Services
         {
             context.Response.Cookies.Append(
                 CookieRequestCultureProvider.DefaultCookieName,
-                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)));
-        }
-
-        public IEnumerable<string> GetLanguages()
-        {
-            return new List<string> {"en", "fr", "es"};
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions {Expires = System.DateTimeOffset.UtcNow.AddYears(1)}
+            );
         }
     }
 }
