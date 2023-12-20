@@ -43,7 +43,7 @@ namespace P2FixAnAppDotNetCode.Controllers
         public ViewResult Completed()
         {
             _cart.Clear();
-            return View();
+            return View("Completed", _localizer["OrderCompleted"]);
         }
     }
 }
