@@ -7,12 +7,7 @@ namespace P2FixAnAppDotNetCode.Models.Repositories
     /// </summary>
     public class OrderRepository : IOrderRepository
     {
-        private readonly List<Order> _orders;
-
-        public OrderRepository()
-        {
-            _orders = new List<Order>();
-        }
+        private readonly List<Order> _orders = new();
 
         /// <summary>
         /// Saves an order
