@@ -9,11 +9,16 @@ namespace P2FixAnAppDotNetCode.Models
     /// </summary>
     public class Cart : ICart
     {
-        
-        private List<CartLine> _cartLines = new List<CartLine>();
+
+        private readonly List<CartLine> _cartLines;
+
+        public Cart()
+        {
+            _cartLines = new List<CartLine>();
+        }
         
         /// <summary>
-        /// Read-only property for dispaly only
+        /// Read-only property for display only
         /// </summary>
         public IEnumerable<CartLine> Lines => GetCartLineList();
 
@@ -31,24 +36,23 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>//
         public void AddItem(Product product, int quantity)
         {
-            // Get the current cart lines
-            var cartLines = GetCartLineList();
-
             // Check if the product already exists in the cart
-            var cartLine = cartLines.FirstOrDefault(p => p.Product.Id == product.Id);
+            var cartLine = _cartLines.FirstOrDefault(p => p.Product.Id == product.Id);
 
-            Console.WriteLine(cartLine);
             if (cartLine != null)
             {
-                // If the product exists, increment the quantity
                 cartLine.Quantity += quantity;
+                
+                // If the quantity is 0, remove the product from the cart
+                if (cartLine.Quantity == 0)
+                {
+                    RemoveLine(product);
+                }
             }
             else
             {
-                // If the product does not exist, add a new CartLine
-                cartLines.Add(new CartLine { Product = product, Quantity = quantity });
+                _cartLines.Add(new CartLine { Product = product, Quantity = quantity });
             }
-            
         }
 
         /// <summary>
@@ -71,7 +75,7 @@ namespace P2FixAnAppDotNetCode.Models
         public double GetAverageValue()
         {
             var countProducts =GetCartLineList().Sum(p=>p.Quantity);
-            return GetTotalValue() / countProducts;
+            return countProducts == 0 ? 0 : GetTotalValue() / countProducts;
         }
 
         /// <summary>
@@ -102,7 +106,6 @@ namespace P2FixAnAppDotNetCode.Models
 
     public class CartLine
     {
-        public int OrderLineId { get; set; }
         public Product Product { get; set; }
         public int Quantity { get; set; }
     }
