@@ -1,4 +1,6 @@
-﻿namespace P2FixAnAppDotNetCode.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace P2FixAnAppDotNetCode.Models
 {
   public class Product
   {
@@ -20,7 +22,8 @@
     public string Details { get; set; }
 
     public int Stock { get; set; }
-
+    
+    [DataType(DataType.Currency)]
     public double Price { get; set; }
   }
 }
