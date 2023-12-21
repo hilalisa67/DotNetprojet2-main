@@ -7,9 +7,6 @@ using Xunit;
 
 namespace P2FixAnAppDotNetCode.Tests
 {
-    /// <summary>
-    /// The ProductService test class
-    /// </summary>
     public class ProductServiceTests
     {
 

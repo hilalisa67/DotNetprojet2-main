@@ -3,9 +3,6 @@ using System.Linq;
 
 namespace P2FixAnAppDotNetCode.Models.Repositories
 {
-    /// <summary>
-    /// The class that manages product data
-    /// </summary>
     public class ProductRepository : IProductRepository
     {
         private static List<Product> _products;
@@ -17,10 +14,7 @@ namespace P2FixAnAppDotNetCode.Models.Repositories
             GenerateProductData();
 
         }
-
-        /// <summary>
-        /// Generate the default list of products
-        /// </summary>
+        
         private void GenerateProductData()
         {
             int id = 0;
@@ -30,19 +24,13 @@ namespace P2FixAnAppDotNetCode.Models.Repositories
             _products.Add(new Product(++id, 40, 32.50, "VTech CS6114 DECT 6.0", "Cordless Phone"));
             _products.Add(new Product(++id, 50, 895.00, "NOKIA OEM BL-5J", "Cell Phone "));
         }
-
-        /// <summary>
-        /// Get all products from the inventory
-        /// </summary>
+        
         public List<Product> GetAllProducts()
         {
             var products = _products.OrderBy(p => p.Name).ToList();
             return products;
         }
-
-        /// <summary>
-        /// Update the stock of a product in the inventory by its id
-        /// </summary>
+        
         public void UpdateProductStocks(int productId, int quantityToRemove)
         {
             var product = _products.FirstOrDefault(p => p.Id == productId);

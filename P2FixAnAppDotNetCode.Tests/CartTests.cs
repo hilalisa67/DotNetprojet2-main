@@ -7,9 +7,6 @@ using Xunit;
 
 namespace P2FixAnAppDotNetCode.Tests
 {
-    /// <summary>
-    /// The Cart test class
-    /// </summary>
     public class CartTests
     {
         [Fact]

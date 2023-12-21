@@ -3,9 +3,6 @@ using Xunit;
 
 namespace P2FixAnAppDotNetCode.Tests
 {
-    /// <summary>
-    /// The LanguageService class
-    /// </summary>
     public class LanguageServiceTests
     {
         [Fact]
